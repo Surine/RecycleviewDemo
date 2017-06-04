@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +37,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                 Toast.makeText(mContext,"点击了"+mStrings.get(position),Toast.LENGTH_SHORT).show();
             }
         });
+         holder.mLinearLayout.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
 
+             }
+         });
         return holder;
     }
 
@@ -54,10 +60,23 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView mTextView;
         Button mButton;
+        LinearLayout mLinearLayout;
         public ViewHolder(View itemView) {
             super(itemView);
             mTextView = (TextView) itemView.findViewById(R.id.textView);
             mButton = (Button) itemView.findViewById(R.id.button);
+            mLinearLayout = (LinearLayout) itemView.findViewById(R.id.lin);
         }
+    }
+
+
+    public void addData(int position){
+        mStrings.add(position,"ADD"+position);
+        notifyItemInserted(position);
+    }
+
+    public void removeData(int position){
+        mStrings.remove(position);
+        notifyItemRemoved(position);
     }
 }
